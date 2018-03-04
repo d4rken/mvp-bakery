@@ -7,7 +7,7 @@ MVP-Bakery helps you structure your Android app to implement MVP principles and 
 
 It is the successor to [OMMVPLib](https://github.com/d4rken/ommvplib)
 
-MVP-Bakery can use a `Loader` or a `ViewModel` to store the `Presenter`.
+MVP-Bakery can use a `Loader` or a `ViewModel` to store your `Presenter`.
 
 Checkout the demo application!
 
@@ -20,12 +20,7 @@ implementation 'eu.darken.mvpbakery:library:0.3.0'
 ### Without Dagger
 The `Presenter` and the `View` that our `Activity` will implement.
 ```java
-@MainComponent.Scope
-public class MainPresenter extends Presenter<MainPresenter.View, MainComponent> {
-
-    @Inject
-    MainPresenter() {
-    }
+public class MainPresenter extends Presenter<MainPresenter.View> {
 
     @Override
     public void onBindChange(@Nullable View view) {
@@ -75,21 +70,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 ```
 
 ### With Dagger
-The component for our injection.
-```java
-@MainComponent.Scope
-@Subcomponent(modules = {AndroidSupportInjectionModule.class})
-public interface MainComponent extends ActivityComponent<MainActivity>, PresenterComponent<MainPresenter.View, MainPresenter> {
-    
-    @Subcomponent.Builder
-    abstract class Builder extends ActivityComponent.Builder<MainActivity, MainComponent> {}
-    
-    @javax.inject.Scope
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface Scope {}
-}
-```
-
 The `Presenter` that will be injected, including the `View` that our `Activity` will implement.
 
 ```java
@@ -133,14 +113,28 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 }
 ```
 
+The dagger component.
+```java
+@MainComponent.Scope
+@Subcomponent(modules = {AndroidSupportInjectionModule.class})
+public interface MainComponent extends ActivityComponent<MainActivity>, PresenterComponent<MainPresenter.View, MainPresenter> {
+    
+    @Subcomponent.Builder
+    abstract class Builder extends ActivityComponent.Builder<MainActivity, MainComponent> {}
+    
+    @javax.inject.Scope
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Scope {}
+}
+```
+
 
 ## Acknowledgements
 This library combines multiple concepts: 
 
+* [ommvplib](https://github.com/d4rken/ommvplib) this libraries predecessor
 * [tomorrow-mvp](https://github.com/michal-luszczuk/tomorrow-mvp) by Michał Łuszczuk
 * [toegether-mvp](https://github.com/laenger/together-mvp) by Christian Langer
 * [activities-multibinding-in-dagger-2](http://frogermcs.github.io/activities-multibinding-in-dagger-2/) by Miroslaw Stanek
 * [Dagger2-MultiBinding-Android-Example](https://github.com/trevjonez/Dagger2-MultiBinding-Android-Example) by Trevor Jones
 * [MCE3 Dagger 2 Talk](https://www.youtube.com/watch?v=iwjXqRlEevg) by Gregory Kick
-
-Check out [@luszczuk's](https://twitter.com/luszczuk) (author of tomorrow-mvp) [comparison of Android MVP approaches](http://blog.propaneapps.com/android/mvp-for-android/).
