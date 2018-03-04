@@ -14,7 +14,7 @@ Checkout the demo application!
 ## Quickstart
 Add the library:
 ```groovy
-implementation 'eu.darken.mvp-bakery:library:0.3.0'
+implementation 'eu.darken.mvpbakery:library:0.3.0'
 ```
 
 ### Without Dagger
