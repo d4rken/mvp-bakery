@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
 import eu.darken.mvpbakery.injection.ManualInjector;
-import eu.darken.mvpbakery.injection.fragment.support.HasManualSupportFragmentInjector;
+import eu.darken.mvpbakery.injection.fragment.HasManualFragmentInjector;
 
-public class FragmentTestActivity extends AppCompatActivity implements HasManualSupportFragmentInjector {
+public class FragmentTestActivity extends AppCompatActivity implements HasManualFragmentInjector {
 
     ManualInjector<Fragment> manualInjector;
 

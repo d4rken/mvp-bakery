@@ -5,7 +5,7 @@ import android.app.Activity;
 import eu.darken.mvpbakery.base.Presenter;
 import eu.darken.mvpbakery.base.PresenterFactory;
 import eu.darken.mvpbakery.injection.activity.HasManualActivityInjector;
-import eu.darken.mvpbakery.injection.fragment.support.HasManualSupportFragmentInjector;
+import eu.darken.mvpbakery.injection.fragment.HasManualFragmentInjector;
 
 
 public class InjectedPresenter<
@@ -35,7 +35,7 @@ public class InjectedPresenter<
             //noinspection unchecked
             component = (ComponentT) injectorSource.activityInjector().get(activity);
         } else if (supportFragment != null) {
-            HasManualSupportFragmentInjector injectorSource = (HasManualSupportFragmentInjector) supportFragment.getActivity();
+            HasManualFragmentInjector injectorSource = (HasManualFragmentInjector) supportFragment.getActivity();
             try {
                 //noinspection unchecked,ConstantConditions
                 component = (ComponentT) injectorSource.supportFragmentInjector().get(supportFragment);

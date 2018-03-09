@@ -5,14 +5,14 @@ import java.lang.annotation.RetentionPolicy;
 
 import dagger.Subcomponent;
 import eu.darken.mvpbakery.injection.PresenterComponent;
-import eu.darken.mvpbakery.injection.fragment.support.SupportFragmentComponent;
+import eu.darken.mvpbakery.injection.fragment.FragmentComponent;
 
 @CountingComponent.Scope
 @Subcomponent(modules = {CountingModule.class})
-public interface CountingComponent extends SupportFragmentComponent<CountingFragment>, PresenterComponent<CountingPresenter.View, CountingPresenter> {
+public interface CountingComponent extends FragmentComponent<CountingFragment>, PresenterComponent<CountingPresenter.View, CountingPresenter> {
 
     @Subcomponent.Builder
-    abstract class Builder extends SupportFragmentComponent.Builder<CountingFragment, CountingComponent> {
+    abstract class Builder extends FragmentComponent.Builder<CountingFragment, CountingComponent> {
         public abstract Builder module(CountingModule module);
     }
 

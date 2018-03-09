@@ -23,10 +23,10 @@ import eu.darken.mvpbakery.injection.ComponentSource;
 import eu.darken.mvpbakery.injection.InjectedPresenter;
 import eu.darken.mvpbakery.injection.ManualInjector;
 import eu.darken.mvpbakery.injection.PresenterInjectionCallback;
-import eu.darken.mvpbakery.injection.fragment.support.HasManualSupportFragmentInjector;
+import eu.darken.mvpbakery.injection.fragment.HasManualFragmentInjector;
 
 
-public class MainActivity extends AppCompatActivity implements MainPresenter.View, HasManualSupportFragmentInjector {
+public class MainActivity extends AppCompatActivity implements MainPresenter.View, HasManualFragmentInjector {
 
     @Inject ComponentSource<Fragment> componentSource;
     @Inject MainPresenter presenter;
