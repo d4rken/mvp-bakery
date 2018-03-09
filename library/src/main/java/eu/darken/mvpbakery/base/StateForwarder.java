@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 public class StateForwarder {
-    private Listener internalCallback;
+    @Nullable private Listener internalCallback;
     private Bundle inState;
     private Bundle outState;
     private boolean isRestoreConsumed = false;
 
-    public void setListener(Listener internalCallback) {
+    public void setListener(@Nullable Listener internalCallback) {
         this.internalCallback = internalCallback;
+        if (internalCallback == null) return;
         if (inState != null) {
             isRestoreConsumed = internalCallback.onCreate(inState);
             if (isRestoreConsumed) inState = null;

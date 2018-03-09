@@ -18,13 +18,8 @@ public class PresenterInjectionCallback<
     }
 
     @Override
-    public void onPresenterCreated(PresenterT presenter) {
+    public void onPresenterAvailable(PresenterT presenter) {
         final ComponentT component = presenter.getComponent();
         component.inject(injectionTarget);
-    }
-
-    @Override
-    public void onPresenterDestroyed() {
-
     }
 }

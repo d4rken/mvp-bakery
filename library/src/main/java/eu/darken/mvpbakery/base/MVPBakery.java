@@ -18,7 +18,6 @@ public class MVPBakery<ViewT extends Presenter.View, PresenterT extends Presente
     final PresenterFactory<PresenterT> presenterFactory;
     final List<PresenterRetainer.Callback<ViewT, PresenterT>> presenterCallbacks;
 
-
     MVPBakery(Builder<ViewT, PresenterT> builder) {
         this.presenterRetainer = builder.presenterRetainer;
         this.stateForwarder = builder.stateForwarder;
@@ -29,16 +28,8 @@ public class MVPBakery<ViewT extends Presenter.View, PresenterT extends Presente
     public void attach(LifecycleOwner lifecycleOwner) {
         if (stateForwarder != null) this.presenterRetainer.setStateForwarder(stateForwarder);
         this.presenterRetainer.setPresenterFactory(presenterFactory);
-        this.presenterRetainer.attach(lifecycleOwner, new PresenterRetainer.Callback<ViewT, PresenterT>() {
-            @Override
-            public void onPresenterCreated(PresenterT presenter) {
-                for (PresenterRetainer.Callback<ViewT, PresenterT> c : presenterCallbacks) c.onPresenterCreated(presenter);
-            }
-
-            @Override
-            public void onPresenterDestroyed() {
-                for (PresenterRetainer.Callback<ViewT, PresenterT> c : presenterCallbacks) c.onPresenterDestroyed();
-            }
+        this.presenterRetainer.attach(lifecycleOwner, presenter -> {
+            for (PresenterRetainer.Callback<ViewT, PresenterT> c : presenterCallbacks) c.onPresenterAvailable(presenter);
         });
     }
 

@@ -9,6 +9,8 @@ import javax.inject.Inject;
 
 import eu.darken.mvpbakery.base.Presenter;
 import eu.darken.mvpbakery.base.StateListener;
+import eu.darken.mvpbakery.example.screens.counting.CountingFragment;
+import eu.darken.mvpbakery.example.screens.text.TextFragment;
 import eu.darken.mvpbakery.injection.ComponentPresenter;
 
 
@@ -18,6 +20,7 @@ public class MainPresenter extends ComponentPresenter<MainPresenter.View, MainCo
     private final Class<? extends Fragment> startingFragment;
     private boolean doInit = true;
     private int bindCounter = 0;
+    private int fragmentNo = 1;
 
     @Inject
     MainPresenter(Class<? extends Fragment> startingFragment) {
@@ -44,6 +47,19 @@ public class MainPresenter extends ComponentPresenter<MainPresenter.View, MainCo
                 v.showFragment(startingFragment);
             }
         });
+    }
+
+    public void switchFragments() {
+        fragmentNo = fragmentNo == 1 ? 2 : 1;
+
+        switch (fragmentNo) {
+            case 1:
+                onView(v -> v.showFragment(CountingFragment.class));
+                break;
+            case 2:
+                onView(v -> v.showFragment(TextFragment.class));
+                break;
+        }
     }
 
     public interface View extends Presenter.View {

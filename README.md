@@ -7,14 +7,14 @@ MVP-Bakery helps you structure your Android app to implement MVP principles and 
 
 It is the successor to [OMMVPLib](https://github.com/d4rken/ommvplib)
 
-MVP-Bakery can use a `Loader` or a `ViewModel` to store your `Presenter`.
+MVP-Bakery can uses `ViewModel` to retain `Presenter`.
 
 Checkout the demo application!
 
 ## Quickstart
 Add the library:
 ```groovy
-implementation 'eu.darken.mvpbakery:library:0.3.0'
+implementation 'eu.darken.mvpbakery:library:0.4.0'
 ```
 
 ### Without Dagger

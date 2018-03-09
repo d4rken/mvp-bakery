@@ -36,8 +36,14 @@ repositories {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
 }
+//noinspection GroovyAssignabilityCheck
+configurations.all {
+    resolutionStrategy.force "android.arch.lifecycle:runtime:${lifeCycleCompVersion}"
+}
 dependencies {
     implementation project(':library')
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 
     testImplementation 'junit:junit:4.12'
 

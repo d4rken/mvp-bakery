@@ -22,9 +22,10 @@ ext {
     buildToolsVersion = '27.0.3'
     targetSdkVersion = 27
 
-    supportVersion = '27.1.0'
+    supportVersion = '27.0.2'
     daggerVersion = '2.13'
     butterknifeVersion = '8.8.1'
+    lifeCycleCompVersion = '1.1.0'
 }
 
 
