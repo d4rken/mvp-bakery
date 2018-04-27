@@ -7,7 +7,7 @@ MVP-Bakery helps you structure your Android app to implement MVP principles and 
 
 It is the successor to [OMMVPLib](https://github.com/d4rken/ommvplib)
 
-MVP-Bakery can uses `ViewModel` to retain `Presenter`.
+MVP-Bakery uses `ViewModel` to retain `Presenter`.
 
 Checkout the demo application!
 
