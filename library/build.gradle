@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.dcendents.android-maven" version "2.0"
+    id "com.github.dcendents.android-maven" version "2.1"
     id "com.jfrog.bintray" version "1.8.0"
     id "jacoco"
     id "com.github.kt3k.coveralls" version "2.5.0-x"
@@ -8,7 +8,7 @@ apply plugin: 'com.android.library'
 
 def versionMajor = 0
 def versionMinor = 4
-def versionPatch = 0
+def versionPatch = 1
 def myVersionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
 def myVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
 

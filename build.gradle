@@ -5,7 +5,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
     }
 }
 
@@ -22,7 +22,7 @@ ext {
     buildToolsVersion = '27.0.3'
     targetSdkVersion = 27
 
-    supportVersion = '27.0.2'
+    supportVersion = '27.1.1'
     daggerVersion = '2.13'
     butterknifeVersion = '8.8.1'
     lifeCycleCompVersion = '1.1.0'
