@@ -35,6 +35,7 @@ public class CountingPresenter extends ComponentPresenter<CountingPresenter.View
     public void onBindChange(@Nullable View view) {
         super.onBindChange(view);
         if (view != null) view.showText(String.valueOf(counter.getCurrent()));
+        onView(v -> v.showPresenterInfo(this));
     }
 
     @Override
@@ -50,5 +51,7 @@ public class CountingPresenter extends ComponentPresenter<CountingPresenter.View
 
     public interface View extends Presenter.View {
         void showText(String text);
+
+        void showPresenterInfo(CountingPresenter presenter);
     }
 }

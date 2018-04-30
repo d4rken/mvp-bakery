@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -25,6 +26,7 @@ import eu.darken.mvpbakery.injection.PresenterInjectionCallback;
 public class TextFragment extends Fragment implements TextPresenter.View {
 
     @BindView(R.id.text_input) EditText textInput;
+    @BindView(R.id.presenter_info) TextView presenterInfo;
 
     private final StateForwarder stateForwarder = new StateForwarder();
     @Inject TextPresenter presenter;
@@ -75,5 +77,10 @@ public class TextFragment extends Fragment implements TextPresenter.View {
     @Override
     public void showText(String text) {
         textInput.setText(text);
+    }
+
+    @Override
+    public void showPresenterInfo(TextPresenter presenter) {
+        presenterInfo.setText(presenter.toString());
     }
 }

@@ -21,6 +21,7 @@ public class TextPresenter extends ComponentPresenter<TextPresenter.View, TextCo
     public void onBindChange(@Nullable View view) {
         super.onBindChange(view);
         onView(v -> v.showText(text));
+        onView(v -> v.showPresenterInfo(this));
     }
 
     void onTextInput(String text) {
@@ -29,5 +30,7 @@ public class TextPresenter extends ComponentPresenter<TextPresenter.View, TextCo
 
     public interface View extends Presenter.View {
         void showText(String text);
+
+        void showPresenterInfo(TextPresenter presenter);
     }
 }

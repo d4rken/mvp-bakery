@@ -7,15 +7,32 @@
               android:orientation="vertical"
               tools:context=".screens.MainActivity">
 
-    <TextView
-        android:id="@+id/bindcounter"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="16dp"
-        android:text="Activity Rotation Count: 0"/>
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-    <FrameLayout
+        <TextView
+            android:id="@+id/bindcounter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="Activity Rotation Count: 0"/>
+
+        <TextView
+            android:id="@+id/pageinfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"
+            android:text="Page info"/>
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

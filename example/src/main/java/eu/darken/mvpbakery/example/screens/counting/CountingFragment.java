@@ -23,6 +23,7 @@ import eu.darken.mvpbakery.injection.PresenterInjectionCallback;
 public class CountingFragment extends Fragment implements CountingPresenter.View {
 
     @BindView(R.id.fragment_text) TextView textView;
+    @BindView(R.id.presenter_info) TextView presenterInfo;
 
     private StateForwarder stateForwarder;
     private MVPBakery<CountingPresenter.View, CountingPresenter> mvpBakery;
@@ -73,5 +74,10 @@ public class CountingFragment extends Fragment implements CountingPresenter.View
     @OnClick(R.id.fragment_button)
     void onCountClick() {
         mvpBakery.getPresenter().onCountClick();
+    }
+
+    @Override
+    public void showPresenterInfo(CountingPresenter presenter) {
+        presenterInfo.setText(presenter.toString());
     }
 }

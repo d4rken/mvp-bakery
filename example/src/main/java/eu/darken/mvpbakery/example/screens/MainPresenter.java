@@ -49,7 +49,7 @@ public class MainPresenter extends ComponentPresenter<MainPresenter.View, MainCo
         });
     }
 
-    public void switchFragments() {
+    public void addFragment() {
         fragmentNo = fragmentNo == 1 ? 2 : 1;
 
         switch (fragmentNo) {

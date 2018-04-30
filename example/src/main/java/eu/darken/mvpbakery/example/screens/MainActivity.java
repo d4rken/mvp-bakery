@@ -2,11 +2,10 @@ package eu.darken.mvpbakery.example.screens;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -30,10 +29,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     @Inject ComponentSource<Fragment> componentSource;
     @Inject MainPresenter presenter;
-    @BindView(R.id.container) ViewGroup container;
+    @BindView(R.id.container) ViewPager viewPager;
     @BindView(R.id.bindcounter) TextView bindCounter;
+    @BindView(R.id.pageinfo) TextView pageInfo;
 
     private final StateForwarder stateForwarder = new StateForwarder();
+    private PagerAdapter pagerAdapter;
 
     @Override
     public ManualInjector<Fragment> supportFragmentInjector() {
@@ -41,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        stateForwarder.onCreate(savedInstanceState);
+    protected void onCreate(Bundle si) {
+        super.onCreate(si);
+        stateForwarder.onCreate(si);
         MVPBakery.<MainPresenter.View, MainPresenter>builder()
                 .stateForwarder(stateForwarder)
                 .presenterFactory(new InjectedPresenter<>(this))
@@ -53,30 +54,41 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), si != null ? si.getInt("pages", 0) : 0);
+        viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                final Fragment fragment = pagerAdapter.getItem(position);
+                pageInfo.setText(fragment.toString() + "\n");
+                pageInfo.append(String.valueOf(position + 1) + "/" + pagerAdapter.getCount());
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("pages", pagerAdapter.getCount());
         stateForwarder.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void showFragment(Class<? extends Fragment> fragmentClass) {
-        final Fragment oldFragment = getSupportFragmentManager().findFragmentById(R.id.container);
-        if (!fragmentClass.isInstance(oldFragment)) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            if (oldFragment != null) transaction = transaction.detach(oldFragment);
-
-            Fragment newFragment = getSupportFragmentManager().findFragmentByTag(fragmentClass.getName());
-            if (newFragment != null) {
-                transaction = transaction.attach(newFragment);
-            } else {
-                newFragment = Fragment.instantiate(this, fragmentClass.getName());
-                transaction = transaction.add(R.id.container, newFragment, fragmentClass.getName());
-            }
-            transaction.commit();
-        }
+        pagerAdapter.addPage(true);
+        viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
     }
 
     @Override
@@ -93,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.switch_fragment:
-                presenter.switchFragments();
+            case R.id.add_fragment:
+                presenter.addFragment();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
