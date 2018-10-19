@@ -29,7 +29,6 @@ public class ExampleApplication extends Application implements HasManualActivity
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder() //
                 .detectAll() //
                 .penaltyLog() //
-                .penaltyDeath() //
                 .build());
         Timber.plant(new Timber.DebugTree());
         appComponent = DaggerAppComponent.builder()

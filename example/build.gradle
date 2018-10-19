@@ -64,7 +64,7 @@ dependencies {
     implementation "com.jakewharton:butterknife:${butterknifeVersion}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
 
-    implementation 'com.jakewharton.timber:timber:4.7.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     androidTestImplementation 'org.mockito:mockito-core:2.8.9'
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
