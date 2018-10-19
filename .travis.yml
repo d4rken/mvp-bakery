@@ -2,7 +2,8 @@ notifications:
   email: false
 
 language: android
-jdk: oraclejdk8
+jdk:
+  - openjdk8
 
 env:
   matrix:
