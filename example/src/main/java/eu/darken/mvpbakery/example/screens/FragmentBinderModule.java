@@ -5,19 +5,19 @@ import android.support.v4.app.Fragment;
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.AndroidInjector;
-import dagger.android.support.FragmentKey;
 import dagger.multibindings.IntoMap;
 import eu.darken.mvpbakery.example.screens.counting.CountingComponent;
 import eu.darken.mvpbakery.example.screens.counting.CountingFragment;
 import eu.darken.mvpbakery.example.screens.text.TextComponent;
 import eu.darken.mvpbakery.example.screens.text.TextFragment;
+import eu.darken.mvpbakery.injection.fragment.FragmentKey;
 
 
 @Module(subcomponents = {
         CountingComponent.class,
         TextComponent.class
 })
-public abstract class FragmentBinderModule {
+abstract class FragmentBinderModule {
 
     @Binds
     @IntoMap
