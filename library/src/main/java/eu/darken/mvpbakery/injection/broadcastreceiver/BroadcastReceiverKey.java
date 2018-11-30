@@ -15,6 +15,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(METHOD)
 @Retention(RUNTIME)
 @MapKey
-public @interface BroadcastReceivertKey {
+public @interface BroadcastReceiverKey {
     Class<? extends BroadcastReceiver> value();
 }
