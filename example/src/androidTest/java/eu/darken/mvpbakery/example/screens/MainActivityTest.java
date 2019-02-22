@@ -11,10 +11,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 import dagger.android.AndroidInjector;
 import eu.darken.mvpbakery.example.ExampleApplicationMock;
 import eu.darken.mvpbakery.example.R;
@@ -51,7 +52,7 @@ public class MainActivityTest {
 
     @Before
     public void setUp() {
-        app = (ExampleApplicationMock) InstrumentationRegistry.getTargetContext().getApplicationContext();
+        app = ApplicationProvider.getApplicationContext();
         app.setActivityComponentSource(new ActivityInjector());
 
         doAnswer(invocation -> {
@@ -76,8 +77,9 @@ public class MainActivityTest {
 
     public class ActivityInjector implements ManualInjector<Activity> {
 
+        @SuppressWarnings("unchecked")
         @Override
-        public AndroidInjector get(Activity instance) {
+        public AndroidInjector get(@NonNull Activity instance) {
             return mainComponent;
         }
 
