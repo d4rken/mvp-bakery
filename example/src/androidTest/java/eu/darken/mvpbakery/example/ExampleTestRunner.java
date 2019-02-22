@@ -2,7 +2,8 @@ package eu.darken.mvpbakery.example;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.test.runner.AndroidJUnitRunner;
+
+import androidx.test.runner.AndroidJUnitRunner;
 
 public class ExampleTestRunner extends AndroidJUnitRunner {
 

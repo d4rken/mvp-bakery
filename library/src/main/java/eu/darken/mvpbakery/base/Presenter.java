@@ -1,8 +1,8 @@
 package eu.darken.mvpbakery.base;
 
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 public interface Presenter<ViewT extends Presenter.View> {
 

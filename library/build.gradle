@@ -7,8 +7,8 @@ plugins {
 apply plugin: 'com.android.library'
 
 def versionMajor = 0
-def versionMinor = 5
-def versionPatch = 1
+def versionMinor = 6
+def versionPatch = 0
 def myVersionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
 def myVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
 
@@ -27,7 +27,7 @@ android {
         versionCode myVersionCode
         versionName myVersionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
@@ -40,13 +40,13 @@ android {
 }
 
 dependencies {
-    implementation "android.arch.lifecycle:common:${lifeCycleCompVersion}"
-    implementation "android.arch.lifecycle:common-java8:${lifeCycleCompVersion}"
-    implementation "android.arch.lifecycle:extensions:${lifeCycleCompVersion}"
+    implementation "androidx.lifecycle:lifecycle-common:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 
-    implementation "com.android.support:support-annotations:${supportVersion}"
-    implementation "com.android.support:appcompat-v7:${supportVersion}"
-    implementation "com.android.support:preference-v7:${supportVersion}"
+    implementation "androidx.annotation:annotation:1.0.1"
+    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "androidx.preference:preference:1.0.0"
 
     implementation "com.google.dagger:dagger:${daggerVersion}"
     implementation "com.google.dagger:dagger-android:${daggerVersion}"
@@ -68,7 +68,7 @@ task javadoc(type: Javadoc) {
 }
 afterEvaluate {
     javadoc.classpath += files(android.libraryVariants.collect { variant ->
-        variant.javaCompiler.classpath.files
+        variant.javaCompileProvider.get().classpath.files
     })
 }
 

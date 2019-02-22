@@ -2,10 +2,6 @@ package eu.darken.mvpbakery.example.screens;
 
 
 import android.app.Activity;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.Fragment;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,6 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import androidx.fragment.app.Fragment;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import dagger.android.AndroidInjector;
 import eu.darken.mvpbakery.example.ExampleApplicationMock;
 import eu.darken.mvpbakery.example.R;
@@ -24,10 +24,10 @@ import eu.darken.mvpbakery.example.screens.counting.CountingPresenter;
 import eu.darken.mvpbakery.injection.ComponentSource;
 import eu.darken.mvpbakery.injection.ManualInjector;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
@@ -57,8 +57,10 @@ public class MainActivityTest {
         doAnswer(invocation -> {
             MainActivity mainActivity = invocation.getArgument(0);
             mainActivity.componentSource = fragmentInjector;
+            mainActivity.presenter = mainPresenter;
             return null;
         }).when(mainComponent).inject(any());
+
         when(mainComponent.getPresenter()).thenReturn(mainPresenter);
         when(mainPresenter.getComponent()).thenReturn(mainComponent);
 
@@ -90,7 +92,8 @@ public class MainActivityTest {
     public void checkFragmentShowing() throws Throwable {
         activityRule.launchActivity(null);
 
-        activityRule.runOnUiThread(() -> activityRule.getActivity().showFragment(CountingFragment.class));
+        activityRule.runOnUiThread(() -> activityRule.getActivity().addFragment(CountingFragment.class));
+
         onView(withId(R.id.fragment_button)).check(matches(withText("+1")));
     }
 

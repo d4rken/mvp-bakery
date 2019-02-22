@@ -2,6 +2,7 @@ package eu.darken.mvpbakery.injection;
 
 import android.app.Activity;
 
+import androidx.fragment.app.Fragment;
 import eu.darken.mvpbakery.base.Presenter;
 import eu.darken.mvpbakery.base.PresenterFactory;
 import eu.darken.mvpbakery.injection.activity.HasManualActivityInjector;
@@ -15,14 +16,14 @@ public class InjectedPresenter<
         implements PresenterFactory<PresenterT> {
 
     private final Activity activity;
-    private final android.support.v4.app.Fragment supportFragment;
+    private final Fragment supportFragment;
 
     public InjectedPresenter(Activity source) {
         this.activity = source;
         this.supportFragment = null;
     }
 
-    public InjectedPresenter(android.support.v4.app.Fragment source) {
+    public InjectedPresenter(Fragment source) {
         this.supportFragment = source;
         this.activity = null;
     }

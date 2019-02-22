@@ -1,7 +1,8 @@
 package eu.darken.mvpbakery.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 public class StateForwarder {
     @Nullable private Listener internalCallback;

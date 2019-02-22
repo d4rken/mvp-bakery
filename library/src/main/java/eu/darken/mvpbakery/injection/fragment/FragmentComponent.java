@@ -1,7 +1,6 @@
 package eu.darken.mvpbakery.injection.fragment;
 
-import android.support.v4.app.Fragment;
-
+import androidx.fragment.app.Fragment;
 import dagger.android.AndroidInjector;
 
 public interface FragmentComponent<FragmentT extends Fragment> extends AndroidInjector<FragmentT> {

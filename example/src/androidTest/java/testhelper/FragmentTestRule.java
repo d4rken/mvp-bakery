@@ -1,12 +1,11 @@
 package testhelper;
 
-import android.support.test.rule.ActivityTestRule;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-
 import junit.framework.Assert;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.test.rule.ActivityTestRule;
 import eu.darken.mvpbakery.example.FragmentTestActivity;
 import eu.darken.mvpbakery.injection.ManualInjector;
 

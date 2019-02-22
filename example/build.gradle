@@ -31,15 +31,7 @@ android.applicationVariants.all {
     def aptOutputDir = new File(buildDir, "generated/source/apt/${it.unitTestVariant.dirName}")
     it.unitTestVariant.addJavaSourceFoldersToModel(aptOutputDir)
 }
-repositories {
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
-}
-//noinspection GroovyAssignabilityCheck
-configurations.all {
-    resolutionStrategy.force "android.arch.lifecycle:runtime:${lifeCycleCompVersion}"
-}
+
 dependencies {
     implementation project(':library')
 
@@ -48,8 +40,8 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
 
-    implementation "com.android.support:design:${supportVersion}"
-    implementation "com.android.support:preference-v14:${supportVersion}"
+    implementation "com.google.android.material:material:1.0.0"
+    implementation "androidx.legacy:legacy-preference-v14:1.0.0"
 
     implementation "com.google.dagger:dagger:${daggerVersion}"
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
@@ -61,28 +53,19 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
 
-    implementation "com.jakewharton:butterknife:${butterknifeVersion}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+    implementation "com.jakewharton:butterknife:10.1.0"
+    annotationProcessor "com.jakewharton:butterknife-compiler:10.1.0"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    androidTestImplementation 'org.mockito:mockito-core:2.8.9'
-    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
-    testImplementation 'org.mockito:mockito-core:2.8.9'
-    testImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
+    androidTestImplementation 'org.mockito:mockito-core:2.20.0'
+    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.19.0'
+    testImplementation 'org.mockito:mockito-core:2.20.0'
+    testImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.19.0'
 
     androidTestImplementation "com.google.code.findbugs:jsr305:3.0.2"
 
-    // Android runner and rules support
-    androidTestImplementation('com.android.support.test:runner:0.5', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation('com.android.support.test:rules:0.5', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-    // Espresso support
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
+    androidTestImplementation 'androidx.test:rules:1.1.2-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 }

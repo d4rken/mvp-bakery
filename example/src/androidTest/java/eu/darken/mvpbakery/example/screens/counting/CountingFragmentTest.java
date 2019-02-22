@@ -1,7 +1,5 @@
 package eu.darken.mvpbakery.example.screens.counting;
 
-import android.support.v4.app.Fragment;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -10,16 +8,17 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import androidx.fragment.app.Fragment;
 import dagger.android.AndroidInjector;
 import eu.darken.mvpbakery.example.R;
 import eu.darken.mvpbakery.injection.ManualInjector;
 import testhelper.FragmentTestRule;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
@@ -70,7 +69,7 @@ public class CountingFragmentTest {
     @Test
     public void testShowText() throws Throwable {
         fragmentRule.launchActivity(null);
-        onView(withId(R.id.fragment_button)).check(matches(withText("count!")));
+        onView(withId(R.id.fragment_button)).check(matches(withText("+1")));
 
         fragmentRule.runOnUiThread(() -> fragmentRule.getFragment().showText("Straw"));
         onView(withId(R.id.fragment_text)).check(matches(withText("Straw")));
@@ -79,7 +78,7 @@ public class CountingFragmentTest {
     }
 
     @Test
-    public void testCount() throws Throwable {
+    public void testCount() {
         fragmentRule.launchActivity(null);
         onView(withId(R.id.fragment_button)).check(matches(withText("+1")));
 

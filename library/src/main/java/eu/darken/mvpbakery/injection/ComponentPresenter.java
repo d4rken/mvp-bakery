@@ -1,9 +1,8 @@
 package eu.darken.mvpbakery.injection;
 
 
-import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
-
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
 import eu.darken.mvpbakery.base.Presenter;
 
 public abstract class ComponentPresenter<ViewT extends Presenter.View, ComponentT extends PresenterComponent<ViewT, ? extends ComponentPresenter>>

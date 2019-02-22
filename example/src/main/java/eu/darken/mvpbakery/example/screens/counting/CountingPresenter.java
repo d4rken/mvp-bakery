@@ -1,11 +1,11 @@
 package eu.darken.mvpbakery.example.screens.counting;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import eu.darken.mvpbakery.base.Presenter;
 import eu.darken.mvpbakery.base.StateListener;
 import eu.darken.mvpbakery.injection.ComponentPresenter;

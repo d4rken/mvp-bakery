@@ -1,9 +1,8 @@
 package eu.darken.mvpbakery.example.screens.text;
 
-import android.support.annotation.Nullable;
-
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import eu.darken.mvpbakery.base.Presenter;
 import eu.darken.mvpbakery.injection.ComponentPresenter;
 

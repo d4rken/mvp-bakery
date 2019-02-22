@@ -1,9 +1,6 @@
 package eu.darken.mvpbakery.example.screens;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -12,6 +9,9 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.darken.mvpbakery.base.MVPBakery;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), si != null ? si.getInt("pages", 0) : 0);
+        pagerAdapter = new PagerAdapter(this, getSupportFragmentManager());
         viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -86,9 +86,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     }
 
     @Override
-    public void showFragment(Class<? extends Fragment> fragmentClass) {
-        pagerAdapter.addPage(true);
+    public void addFragment(Class<? extends Fragment> fragmentClass) {
+        pagerAdapter.addPage(fragmentClass, true);
         viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
+        viewPager.setCurrentItem(pagerAdapter.getCount() - 1);
     }
 
     @Override
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_fragment:
-                presenter.addFragment();
+                presenter.addNewFragment();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

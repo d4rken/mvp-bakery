@@ -2,14 +2,14 @@ package eu.darken.mvpbakery.base;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.arch.lifecycle.LifecycleOwner;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import eu.darken.mvpbakery.injection.InjectedPresenter;
 
 public class MVPBakery<ViewT extends Presenter.View, PresenterT extends Presenter<ViewT>> {
@@ -29,7 +29,8 @@ public class MVPBakery<ViewT extends Presenter.View, PresenterT extends Presente
         if (stateForwarder != null) this.presenterRetainer.setStateForwarder(stateForwarder);
         this.presenterRetainer.setPresenterFactory(presenterFactory);
         this.presenterRetainer.attach(lifecycleOwner, presenter -> {
-            for (PresenterRetainer.Callback<ViewT, PresenterT> c : presenterCallbacks) c.onPresenterAvailable(presenter);
+            for (PresenterRetainer.Callback<ViewT, PresenterT> c : presenterCallbacks)
+                c.onPresenterAvailable(presenter);
         });
     }
 
@@ -87,7 +88,7 @@ public class MVPBakery<ViewT extends Presenter.View, PresenterT extends Presente
         }
 
         /**
-         * @param lifecycleOwner Your {@link AppCompatActivity}, {@link Fragment} or {@link android.support.v4.app.Fragment}
+         * @param lifecycleOwner Your {@link AppCompatActivity}, {@link Fragment} or {@link Fragment}
          */
         public MVPBakery<ViewT, PresenterT> attach(ViewT lifecycleOwner) {
             final MVPBakery<ViewT, PresenterT> lib = build();

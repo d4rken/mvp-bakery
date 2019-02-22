@@ -1,25 +1,25 @@
 package eu.darken.mvpbakery.example.screens;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.darken.mvpbakery.example.screens.counting.CountingFragment;
-import eu.darken.mvpbakery.example.screens.text.TextFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * Created by darken(darken@darken.eu) on 29.04.2018.
  */
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private final List<Page> pages = new ArrayList<>();
+    private final Context context;
 
-    public PagerAdapter(FragmentManager fm, int startPages) {
+    public PagerAdapter(Context context, FragmentManager fm) {
         super(fm);
-        for (int i = 0; i < startPages; i++) addPage(false);
+        this.context = context;
     }
 
     @Override
@@ -27,15 +27,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         return createFragment(position);
     }
 
-    Fragment createFragment(int position) {
-        Fragment fragment;
-        if (position % 2 == 0) {
-            fragment = new TextFragment();
-        } else {
-            fragment = new CountingFragment();
-        }
+    private Fragment createFragment(int position) {
+        Page page = pages.get(position);
+        Fragment fragment = Fragment.instantiate(context, page.getClazz().getName());
         Bundle bundle = new Bundle();
-        bundle.putString("identifier", pages.get(position).getIdentifier());
+        bundle.putString("identifier", page.getIdentifier());
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -45,16 +41,22 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         return pages.size();
     }
 
-    public void addPage(boolean notify) {
-        pages.add(new Page(String.valueOf(pages.size())));
+    public void addPage(Class<? extends Fragment> clazz, boolean notify) {
+        pages.add(new Page(clazz, String.valueOf(pages.size())));
         if (notify) notifyDataSetChanged();
     }
 
     static class Page {
+        private final Class<? extends Fragment> clazz;
         private final String identifier;
 
-        Page(String identifier) {
+        Page(Class<? extends Fragment> clazz, String identifier) {
+            this.clazz = clazz;
             this.identifier = identifier;
+        }
+
+        Class<? extends Fragment> getClazz() {
+            return clazz;
         }
 
         String getIdentifier() {
