@@ -8,6 +8,12 @@ import eu.darken.mvpbakery.injection.InjectedPresenter
 import java.util.*
 
 class MVPBakery<ViewT : Presenter.View, PresenterT : Presenter<ViewT>> internal constructor(builder: Builder<ViewT, PresenterT>) {
+    companion object {
+        @JvmStatic fun <ViewT : Presenter.View, PresenterT : Presenter<ViewT>> builder(): Builder<ViewT, PresenterT> {
+            return Builder()
+        }
+    }
+
     private val presenterRetainer: PresenterRetainer<ViewT, PresenterT>
     private val stateForwarder: StateForwarder?
     private val presenterFactory: PresenterFactory<PresenterT>
@@ -83,12 +89,4 @@ class MVPBakery<ViewT : Presenter.View, PresenterT : Presenter<ViewT>> internal 
             return lib
         }
     }
-
-    companion object {
-
-        fun <ViewT : Presenter.View, PresenterT : Presenter<ViewT>> builder(): Builder<ViewT, PresenterT> {
-            return Builder()
-        }
-    }
-
 }
