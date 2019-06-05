@@ -5,5 +5,5 @@ import dagger.android.support.HasSupportFragmentInjector
 import eu.darken.mvpbakery.injection.ManualInjector
 
 interface HasManualFragmentInjector : HasSupportFragmentInjector {
-    override fun supportFragmentInjector(): ManualInjector<Fragment>
+    override fun supportFragmentInjector(): ManualInjector<Fragment>?
 }

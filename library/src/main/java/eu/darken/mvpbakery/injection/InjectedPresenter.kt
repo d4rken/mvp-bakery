@@ -33,13 +33,11 @@ class InjectedPresenter<ViewT : Presenter.View, PresenterT : ComponentPresenter<
             }
             supportFragment != null -> {
                 val injectorSource = supportFragment.activity as HasManualFragmentInjector
-                try {
-                    @Suppress("UNCHECKED_CAST")
-                    component = injectorSource.supportFragmentInjector()[supportFragment] as ComponentT
-                } catch (e: UninitializedPropertyAccessException) {
-                    return PresenterFactory.FactoryResult.retry()
-                }
 
+                val injector = injectorSource.supportFragmentInjector() ?: return PresenterFactory.FactoryResult.retry()
+
+                @Suppress("UNCHECKED_CAST")
+                component = injector[supportFragment] as ComponentT
             }
             else -> throw RuntimeException("No injection source.")
         }
