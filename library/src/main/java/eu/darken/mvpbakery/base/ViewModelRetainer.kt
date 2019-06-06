@@ -77,7 +77,7 @@ class ViewModelRetainer<ViewT : Presenter.View, PresenterT : Presenter<ViewT>> :
                         val result = presenterFactory.createPresenter()
                         if (result.retry) {
                             if (isDelayedInit) {
-                                throw IllegalStateException("No presenter after final init attempt.")
+                                throw IllegalStateException("No presenter after final init attempt.", result.retryException)
                             } else {
                                 delayedInit = true
                                 return

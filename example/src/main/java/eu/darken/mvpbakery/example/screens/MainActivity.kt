@@ -24,16 +24,11 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainPresenter.View, HasManualFragmentInjector {
 
-    @Inject
-    lateinit var componentSource: ComponentSource<Fragment>
-    @Inject
-    lateinit var presenter: MainPresenter
-    @BindView(R.id.container)
-    lateinit var viewPager: ViewPager
-    @BindView(R.id.bindcounter)
-    lateinit var bindCounter: TextView
-    @BindView(R.id.pageinfo)
-    lateinit var pageInfo: TextView
+    @Inject lateinit var componentSource: ComponentSource<Fragment>
+    @Inject lateinit var presenter: MainPresenter
+    @BindView(R.id.container) lateinit var viewPager: ViewPager
+    @BindView(R.id.bindcounter) lateinit var bindCounter: TextView
+    @BindView(R.id.pageinfo) lateinit var pageInfo: TextView
 
     private val stateForwarder = StateForwarder()
     private var pagerAdapter: PagerAdapter? = null
