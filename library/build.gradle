@@ -45,12 +45,12 @@ android {
 }
 
 dependencies {
-    implementation "androidx.lifecycle:lifecycle-common:2.0.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.0.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-common:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-    implementation "androidx.annotation:annotation:1.0.2"
-    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "androidx.appcompat:appcompat:1.2.0"
     implementation "androidx.preference:preference:1.0.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
