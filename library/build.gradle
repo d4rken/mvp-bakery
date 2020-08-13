@@ -30,6 +30,8 @@ android {
         versionCode myVersionCode
         versionName myVersionName
 
+        consumerProguardFiles 'proguard-rules.pro'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
