@@ -11,7 +11,7 @@ apply plugin: 'org.jetbrains.dokka'
 
 def versionMajor = 0
 def versionMinor = 7
-def versionPatch = 3
+def versionPatch = 4
 def myVersionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
 def myVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
 
